@@ -21,6 +21,26 @@ function Nav() {
         // An error happened.
       });
   }
+
+  const navLinks = [
+    {
+      name: "Home",
+      path: "/",
+    },
+    {
+      name: "Events",
+      path: "/event",
+    },
+    {
+      name: "Contacts",
+      path: "/contact",
+    },
+    {
+      name: "Hire Photographers",
+      path: "/hirePhotographer",
+    },
+  ];
+
   return (
     <header className="w-full items-center z-10 sticky top-0 bg-white py-3">
       <div className="flex items-center justify-between">
@@ -33,10 +53,26 @@ function Nav() {
             />
           </NavLink>
         </div>
-        <div className="flex justify-between w-6/12">
+        <div className="flex justify-between gap-6">
           {" "}
           {/* Added flex className here */}
-          <NavLink
+          {navLinks.map((link, index) => {
+            return (
+              <NavLink
+                to={link.path}
+                className={({ isActive }) =>
+                  isActive
+                    ? "font-bold text-lg text-purple-600"
+                    : "font-bold text-lg"
+                }
+              >
+                <p className="hover:text-purple-500 transition-all duration-300">
+                  {link.name}
+                </p>
+              </NavLink>
+            );
+          })}
+          {/* <NavLink
             to="/"
             className={({ isActive }) =>
               isActive
@@ -82,14 +118,30 @@ function Nav() {
               Career
             </p>
           </NavLink>
+          <NavLink
+            to="/hirePhotographer"
+            className={({ isActive }) =>
+              isActive
+                ? "font-bold text-lg text-purple-500 "
+                : "font-bold text-lg"
+            }
+          >
+            <p className="font-bold text-lg hover:underline underline-offset-8">
+              Hire Photographers
+            </p>
+          </NavLink>
           <NavLink to="/hirePhotographer">
             <button className=" inline-flex items-center justify-center p-0.5   overflow-hidden font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">
               <span className="text-base font-bold px-5 py-1 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
                 Hire Photographers
               </span>
             </button>
-          </NavLink>
+          </NavLink> */}
         </div>
+
+        {/* mobile nav  */}
+
+
         {user ? (
           <div style={{ position: "relative" }}>
             <a className="hover:cursor-pointer">
@@ -128,7 +180,7 @@ function Nav() {
               <NavLink
                 to="/login"
                 className={({ isActive }) =>
-                  isActive ? " text-purple-500" : " text-lg text-gray-700"
+                  isActive ? " text-purple-600" : " text-lg text-gray-700"
                 }
               >
                 <p className="font-bold text-lg ">Log In</p>
